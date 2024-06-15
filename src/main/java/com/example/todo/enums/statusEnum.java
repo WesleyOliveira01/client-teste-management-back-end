@@ -4,5 +4,6 @@ public enum statusEnum {
     EM_TESTE,
     TESTE_FINALIZADO,
     TESTE_EXPIRADO,
-    CONTRATO_ASSINADO
+    CONTRATO_ASSINADO,
+    RETIRADO
 }

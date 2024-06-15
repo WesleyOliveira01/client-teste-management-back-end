@@ -22,6 +22,7 @@ public class MeshService {
         if (entities.isEmpty()) {
             throw new Error("Clients not found");
         }
+        repository.saveAll(entities);
         return entities.stream().map(MeshDto::new).toList();
     }
 
