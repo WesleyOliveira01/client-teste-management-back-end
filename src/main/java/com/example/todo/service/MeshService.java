@@ -2,60 +2,20 @@ package com.example.todo.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.example.todo.dto.MeshDto;
-import com.example.todo.entity.MeshEntity;
 import com.example.todo.enums.statusEnum;
-import com.example.todo.repository.MeshRepository;
 
-import lombok.RequiredArgsConstructor;
+public interface MeshService {
 
-@Service
-@RequiredArgsConstructor
-public class MeshService {
+    List<MeshDto> getAll();
 
-    private final MeshRepository repository;
+    MeshDto getByName(String name);
 
-    public List<MeshDto> getAll() {
-        List<MeshEntity> entities = repository.findAll();
-        if (entities.isEmpty()) {
-            throw new Error("Clients not found");
-        }
-        repository.saveAll(entities);
-        return entities.stream().map(MeshDto::new).toList();
-    }
+    MeshDto create(MeshDto dto);
 
-    public MeshDto getByName(String name) {
-        MeshEntity entity = repository.findByName(name);
-        return new MeshDto(entity);
-    }
+    MeshDto update(Long id, MeshDto dto);
 
-    public MeshDto create(MeshDto dto) {
-        if (dto == null)
-            throw new Error("Body cannot be null");
-        MeshEntity entity = new MeshEntity(dto);
-        repository.save(entity);
-        return new MeshDto(entity);
-    }
+    void updateStatus(Long id, statusEnum status);
 
-    public MeshDto update(Long id, MeshDto dto) {
-        MeshEntity entity = repository.findById(id).orElse(null);
-        entity.setId_client(dto.getId_client());
-        entity.setName(dto.getName());
-        entity.setPrazoFinal(dto.getPrazoFinal());
-        repository.save(entity);
-        return new MeshDto(entity);
-    }
-
-    public void updateStatus(Long id, statusEnum status) {
-        MeshEntity entity = repository.findById(id).orElse(null);
-        entity.setStatus(status);
-        repository.save(entity);
-    }
-
-    public void delete(Long id) {
-        repository.deleteById(id);
-    }
-
+    void delete(Long id);
 }

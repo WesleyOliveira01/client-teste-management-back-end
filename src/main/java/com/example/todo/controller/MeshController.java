@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,32 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.todo.dto.MeshDto;
 import com.example.todo.enums.statusEnum;
-import com.example.todo.service.MeshService;
+import com.example.todo.service.impl.MeshServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/v1/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class MeshController {
 
-    private final MeshService service;
+    private final MeshServiceImpl service;
 
     @GetMapping()
     public ResponseEntity<List<MeshDto>> findAll() {
         try {
             List<MeshDto> list = service.getAll();
             return ResponseEntity.ok().body(list);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @GetMapping("/{name}")
-    public ResponseEntity<MeshDto> find(@PathVariable String name) {
-        try {
-            MeshDto meshDto = service.getByName(name);
-            return ResponseEntity.ok().body(meshDto);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

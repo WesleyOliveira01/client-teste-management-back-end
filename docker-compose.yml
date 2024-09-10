@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  mesh-api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/mesh
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=${dbPassword}
+    restart: always
+    command: java -jar todo.jar
