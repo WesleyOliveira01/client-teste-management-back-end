@@ -11,5 +11,10 @@ public interface UserService {
 
     UserDto getByLogin(String token);
 
+    UserDto getById(Long id);
+
     UserDto update(Long id, UserDto userDto);
+
+    void disable(Long id);
+
 }

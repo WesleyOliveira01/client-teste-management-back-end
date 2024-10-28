@@ -41,11 +41,15 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false)
     private UserRoles role;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     public UserEntity(UserDto userDto) {
         this.name = userDto.name();
         this.login = userDto.login();
         this.password = userDto.password();
         this.role = userDto.role();
+        this.enabled = true;
     }
 
     @Override
@@ -83,7 +87,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
 }

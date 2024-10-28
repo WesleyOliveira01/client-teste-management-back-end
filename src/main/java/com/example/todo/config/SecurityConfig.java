@@ -35,10 +35,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/auth")
                                 .permitAll()
                                 // users
-                                .requestMatchers(HttpMethod.POST, "/users")
+                                .requestMatchers("/users/**")
                                 .permitAll()
-                                .requestMatchers(HttpMethod.GET, "/users")
-                                .hasRole("ADMIN")
                                 // mesh
                                 .requestMatchers("/v1/api/**")
                                 .permitAll()

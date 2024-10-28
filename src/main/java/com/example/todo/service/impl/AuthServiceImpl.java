@@ -35,6 +35,9 @@ public class AuthServiceImpl implements AuthService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
+        if (user.isEnabled() == false) {
+            throw new UsernameNotFoundException("User disabled");
+        }
         return createToken(user);
     }
 

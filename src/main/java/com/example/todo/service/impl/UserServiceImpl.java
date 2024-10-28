@@ -71,4 +71,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public UserDto getById(Long id) {
+        UserEntity user = userRepository.findById(id).orElse(null);
+        return new UserDto(user);
+    }
+
+    @Override
+    public void disable(Long id) {
+        UserEntity user = userRepository.findById(id).orElse(null);
+        user.setEnabled(false);
+        userRepository.save(user);
+    }
+
 }
